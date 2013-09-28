@@ -184,12 +184,14 @@ function GCodeRenderer() {
 	// float angular_travel = atan2(r_axis0*rt_axis1-r_axis1*rt_axis0, r_axis0*rt_axis0+r_axis1*rt_axis1);
 		var theta = Math.atan2((rx*rty - ry*rtx),(rx*rtx + ry*rty));
 		// Calculer l'angle autrement...
-		//console.log("Angle theta calculé ", theta);
+		console.log("Angle theta calculé ", theta);
     // if (angular_travel < 0) { angular_travel += 2*M_PI; }
 	//	if (theta < 0) { theta += 2 * Math.PI ;}
 		if (theta < 0) { theta += 2 * Math.PI ;}
     // if (isclockwise) { angular_travel -= 2*M_PI; }
-		 theta = 2 * Math.PI - theta ; 
+		 theta = 2 * Math.PI - theta ;
+		 
+         //  theta -= 2 * Math.PI ;		 
 	     console.log("Angle corrige", theta);
 	// float millimeters_of_travel = hypot(angular_travel*radius, fabs(linear_travel));
 		var millimeters_of_travel = theta*radius;
@@ -198,7 +200,7 @@ function GCodeRenderer() {
 		var nb_segments = Math.floor(millimeters_of_travel / 1);
     // if(segments == 0) segments = 1;
 		if(nb_segments == 0) nb_segments = 1;
-	 console.log("Nb Segments ", nb_segments);
+	// console.log("Nb Segments ", nb_segments);
     // float theta_per_segment = angular_travel/segments;
 		var theta_per_segment = theta/nb_segments;
     // float linear_per_segment = linear_travel/segments;
@@ -206,9 +208,9 @@ function GCodeRenderer() {
     // float extruder_per_segment = extruder_travel/segments;
 	// Vector rotation matrix values
     // float cos_T = 1 -0.5*theta_per_segment*theta_per_segment; // Small angle approximation
-		var cos_T = 1 -0.5*theta_per_segment*theta_per_segment; // Small angle approximation
+	//	var cos_T = 1 -0.5*theta_per_segment*theta_per_segment; // Small angle approximation
     // float sin_T = theta_per_segment;
-		var sin_T = theta_per_segment;
+	//	var sin_T = theta_per_segment;
     // float arc_target[4];
 		var arc_target = [];
 		var old_target = [];
@@ -229,17 +231,18 @@ function GCodeRenderer() {
 		 old_target[1] = self.lastLine.y ;
 		 old_target[2] = self.lastLine.z ;
 
-    for (i = 1; i< nb_segments ; i++) { // Increment (segments-1)
-	
+    for (i = 1; i < nb_segments ; i++) { // Increment (segments-1)
+	    // G2 OK
+		
 		cos_Ti = Math.cos(i*theta_per_segment);
 		sin_Ti = Math.sin(i*theta_per_segment);
-		// Notion de sens en G2 sens horaire, 
-		rx =  -newLine.i*cos_Ti +  newLine.j*sin_Ti;
-		ry = -newLine.i*sin_Ti - newLine.j*cos_Ti;
 		
-		// Update arc_target location
+		 rx =  -newLine.i*cos_Ti +  newLine.j*sin_Ti;
+		 ry = -newLine.i*sin_Ti - newLine.j*cos_Ti;
+		 
+		// Update arc_target location for G2 cx - rx ?
 		arc_target[0] = cx - rx;
-		arc_target[1] = cy - ry;
+		arc_target[1] = cy + ry;
 		arc_target[2] = newLine.z;
 		    
       // var color =  new THREE.Color(GCodeRenderer.feedColors[viewModel.code.index%GCodeRenderer.feedColors.length]);
@@ -249,7 +252,8 @@ function GCodeRenderer() {
          old_target[0] = arc_target[0] ;
 		 old_target[1] = arc_target[1] ;
 		 old_target[2] = arc_target[2] ;
-// console.log("Dessin de ",old_target[0] ,old_target[1]) ;
+         // console.log("Dessin de ",old_target[0] ,old_target[1]) ;
+ 
       viewModel.vertexIndex = self.feedAllGeo.vertices.length;
 
       if( viewModel.code.index <= self.index ) {
@@ -272,8 +276,8 @@ function GCodeRenderer() {
 
       viewModel.vertexLength = self.feedAllGeo.vertices.length - viewModel.vertexIndex;
       
-     
-	}
+    }
+	
       self.lastLine = newLine;
       return self.feedGeo;
     },
@@ -365,9 +369,10 @@ function GCodeRenderer() {
 		 old_target[2] = self.lastLine.z ;
 
     for (i = 1 ; i < nb_segments ; i ++) { // Increment (segments-1)
-	
+	    // G3 OK
 		cos_Ti = Math.cos(i*theta_per_segment);
 		sin_Ti = Math.sin(i*theta_per_segment);
+		
 		rx = -newLine.i*cos_Ti +  newLine.j*sin_Ti;
 		ry = -newLine.i*sin_Ti - newLine.j*cos_Ti;
 		// Update arc_target location
