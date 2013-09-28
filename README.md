@@ -6,7 +6,10 @@ A web-based 3D viewer for [GCode](http://en.wikipedia.org/wiki/G-code) files.
 Built using WebGL and [three.js](https://github.com/mrdoob/three.js/).
 
 Check it out at [http://jherrm.github.com/gcode-viewer/](http://jherrm.github.com/gcode-viewer/).
+This version is hacked to draw arcs from G2 G3 GCode !
+Richard Timsit (http://fablab-neuch.ch/projects/polarprint3d/)
 
+Check This version at [https://github.com/fablabneuch/gcode-viewer]
 ![Screenshot](https://github.com/jherrm/gcode-viewer/raw/master/screenshots/octocat1.png)
 
 Open sourced under MIT license.
