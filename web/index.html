@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <!--
-    GCode Viewer
+    GCode Viewer for G2 G3
     https://github.com/jherrm/gcode-viewer
+	https://github.com/fabneuch/gcode-viewer
   -->
   <head>
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta charset="utf-8">
-    <title>GCode Viewer</title>
+    <title>GCode Viewer for G2 G3</title>
     <link rel="stylesheet" href="lib/bootstrap.min.css">
     <style>
       #renderArea {
@@ -61,8 +62,7 @@
             <li><a href="javascript:about()">About</a></li>
           </ul>
           <ul class="nav pull-right">
-            <li><a href="https://github.com/jherrm/gcode-viewer" target="_blank">Code on GitHub</a></li>
-            <li><a href="http://twitter.com/jherrm" target="_blank">@jherrm</a></li>
+            <li><a href="http://fablab-neuch.ch/projects/polarprint3d/" target="_blank">Project</a></li>
           </ul>
         </div>
       </div>
@@ -82,8 +82,9 @@
           <li><a href="examples/15mm_cube.gcode">15mm_cube.gcode</a></li>
           <li><a href="examples/octocat.gcode">octocat.gcode</a></li>
           <li><a href="examples/part.gcode">part.gcode</a></li>
-		  <li><a href="examples/Tim.gcode">Gam&egrave;te</a></li>
-		  <li><a href="examples/Simple.gcode">Simple</a></li>
+		  <li><a href="examples/Gamete.gcode">Gam&egrave;te</a></li>
+		  <li><a href="examples/CamG2.gcode">CamG2</a></li>
+		  <li><a href="examples/CamG3.gcode">CamG3</a></li>
 		  <li><a href="examples/XLS.gcode">Xls</a></li>		  
         </ul>
         <p>To view your own model, drag a gcode file from your desktop and drop it in this window.</p>
@@ -112,9 +113,9 @@
         <p>To view your own model, drag a gcode file from your desktop and drop it in this window.</p>
 
         <p>To learn more, read the <a href="http://jherrman.com/2012/10/gcode-viewer/">blog</a> <a href="http://joewalnes.com/2012/04/01/a-3d-webgl-gcode-viewer-for-understanding-3d-printers/" target="_new">posts</a>.</p>
-
-        <p>This code is based off of the <a href="http://gcode.joewalnes.com">original</a> GCode Viewer by <a href="http://joewalnes.com">Joe Walnes</a>.
-      </div>
+		<p>This code is based off of the <a href="http://gcode.joewalnes.com">original</a> GCode Viewer by <a href="http://joewalnes.com">Joe Walnes</a>.
+        <p> Modified in FabLab Neuchatel for G2 and G3 GCode <a href="http://fablab-neuch.ch/projects/polarprint3d/" target="_blank">project</a>... </p>
+	  </div>
       <div class="modal-footer">
         <a class="btn btn-primary" data-dismiss="modal">OK</a>
       </div>

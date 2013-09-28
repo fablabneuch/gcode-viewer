@@ -231,7 +231,7 @@ function GCodeRenderer() {
 		 old_target[1] = self.lastLine.y ;
 		 old_target[2] = self.lastLine.z ;
 
-    for (i = 1; i < nb_segments ; i++) { // Increment (segments-1)
+    for (i = 1; i <= nb_segments ; i++) { // Increment (segments-1)
 	    // G2 OK
 		
 		cos_Ti = Math.cos(i*theta_per_segment);
@@ -368,7 +368,7 @@ function GCodeRenderer() {
 		 old_target[1] = self.lastLine.y ;
 		 old_target[2] = self.lastLine.z ;
 
-    for (i = 1 ; i < nb_segments ; i ++) { // Increment (segments-1)
+    for (i = 1 ; i <= nb_segments ; i ++) { // Increment (segments-1)
 	    // G3 OK
 		cos_Ti = Math.cos(i*theta_per_segment);
 		sin_Ti = Math.sin(i*theta_per_segment);
